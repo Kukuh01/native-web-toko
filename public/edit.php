@@ -37,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
   <meta charset="UTF-8">
   <title>Edit Item</title>
+  <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
   <h1>Edit Item</h1>

@@ -6,7 +6,11 @@ $items = get_all_items();
 ?>
 <!doctype html>
 <html>
-<head><meta charset="utf-8"><title>Items</title></head>
+<head>
+    <meta charset="utf-8">
+    <title>Items</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
     <body>
         <h2>List Items</h2>
 

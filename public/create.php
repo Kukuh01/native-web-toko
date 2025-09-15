@@ -30,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
   <meta charset="UTF-8">
   <title>Create Item</title>
+  <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
   <h1>Create New Item</h1>
