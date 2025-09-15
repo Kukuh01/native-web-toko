@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
     if (login_user($email, $password)) {
-        header('Location: /items.php');
+        header('Location: /dashboard.php');
         exit;
     } else {
         $message = 'Login gagal — periksa email dan password.';

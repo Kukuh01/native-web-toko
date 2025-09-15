@@ -4,7 +4,7 @@ require_once __DIR__.'/db.php';
 
 function get_all_items() {
     $pdo = DB::get();
-    $stmt = $pdo->query('SELECT * FROM items ORDER BY id DESC');
+    $stmt = $pdo->query('SELECT * FROM items ORDER BY created_at DESC');
     return $stmt->fetchAll();
 }
 

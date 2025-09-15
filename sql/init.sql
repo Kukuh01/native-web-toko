@@ -20,6 +20,6 @@ INSERT INTO users (email, password, role) VALUES
 
 INSERT INTO items (name, image, description, price) VALUES
 ('Laptop Asus seri A', 'laptop1.jpg', 'Seri laptop bisnis legendaris. Dikenal dengan keyboard-nya yang luar biasa, sasis yang kokoh, fitur keamanan, dan TrackPoint merah ikoniknya', 3000000),
-('Laptop Asus seri B', 'laptop2.jpg', 'Seri laptop bisnis legendaris. Dikenal dengan keyboard-nya yang luar biasa, sasis yang kokoh, fitur keamanan, dan TrackPoint merah ikoniknya', 4000000),
+('Laptop Asus seri B', 'laptop2.jpeg', 'Seri laptop bisnis legendaris. Dikenal dengan keyboard-nya yang luar biasa, sasis yang kokoh, fitur keamanan, dan TrackPoint merah ikoniknya', 4000000),
 ('Laptop Asus seri C', 'laptop3.png', 'Seri laptop bisnis legendaris. Dikenal dengan keyboard-nya yang luar biasa, sasis yang kokoh, fitur keamanan, dan TrackPoint merah ikoniknya', 3000000),
 ('Laptop Lenovo seri A', 'laptop4.jpg', 'Seri laptop bisnis legendaris. Dikenal dengan keyboard-nya yang luar biasa, sasis yang kokoh, fitur keamanan, dan TrackPoint merah ikoniknya', 4300000);
