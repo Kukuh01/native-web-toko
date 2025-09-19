@@ -1,0 +1,8 @@
+==============================
+Website Untuk Uji Coba
+==============================
+
+How to run ?
+docker-compose up --build -d
+
+Access web via http://localhost:8080 on browser
