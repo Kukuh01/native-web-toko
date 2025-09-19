@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $image = null;
     if (!empty($_FILES['image']['name'])) {
         $filename = time() . '_' . basename($_FILES['image']['name']);
-        $target = __DIR__ . '/uploads' . $filename;
+        $target = __DIR__ . '/uploads/' . $filename;
 
         if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
             $image = $filename;

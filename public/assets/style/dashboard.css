@@ -16,8 +16,9 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: calc(100% - 40px);
     z-index: 999;
+    /* box-sizing: border-box; */
 }
 
 .profile {
@@ -120,6 +121,14 @@ body {
     text-decoration: none;
 }
 
+.btn-logout {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: red;
+    color: white;
+    text-decoration: none;
+}
+
 .modal {
   display: none;
   position: fixed; 
@@ -129,7 +138,7 @@ body {
   background: rgba(0,0,0,0.5);
 }
 
-.modal-content { 
+.create-modal-content { 
   background: #fff;
   margin: 10% auto;
   padding: 20px;
@@ -138,10 +147,24 @@ body {
   box-shadow: 0 0 10px #000;
 }
 
+.edit-modal-content { 
+  background: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 8px;
+  width: 850px;
+  box-shadow: 0 0 10px #000;
+}
+
 .close {
   float: right;
   font-size: 24px;
   cursor: pointer;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
 }
 
 form input[type="text"],

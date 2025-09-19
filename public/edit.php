@@ -4,22 +4,20 @@ require_once __DIR__ . '/../src/items.php';
 
 require_login();
 
-$id = $_GET['id'] ?? null;
-$item = $id ? get_item($id) : null;
-
-if (!$item) {
-    die('Item not found');
-}
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $id    = $_POST['id'] ?? null;
     $name  = $_POST['name'] ?? '';
     $desc  = $_POST['description'] ?? '';
     $price = $_POST['price'] ?? 0;
 
+    if (!$id) {
+        die('Invalid item ID');
+    }
+
     $image = null;
     if (!empty($_FILES['image']['name'])) {
         $filename = time() . '_' . basename($_FILES['image']['name']);
-        $target = __DIR__ . '/uploads/' . $filename;
+        $target   = __DIR__ . '/uploads/' . $filename;
 
         if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
             $image = $filename;
@@ -27,43 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     update_item($id, $name, $desc, $price, $image);
-    header('Location: items.php');
+    header('Location: dashboard.php');
     exit;
 }
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Edit Item</title>
-  <link rel="stylesheet" href="assets/style.css">
-</head>
-<body>
-  <h1>Edit Item</h1>
-  <form method="post" enctype="multipart/form-data">
-    <label>Name:</label><br>
-    <input type="text" name="name" value="<?= htmlspecialchars($item['name']) ?>" required><br><br>
-
-    <label>Description:</label><br>
-    <textarea name="description"><?= htmlspecialchars($item['description']) ?></textarea><br><br>
-
-    <label>Price:</label><br>
-    <input type="number" name="price" step="0.01" value="<?= htmlspecialchars($item['price']) ?>"><br><br>
-
-    <label>Current Image:</label><br>
-    <?php if (!empty($item['image'])): ?>
-      <img src="uploads/<?= htmlspecialchars($item['image']) ?>" style="max-width:150px;"><br>
-    <?php else: ?>
-      <em>No image</em><br>
-    <?php endif; ?>
-    <br>
-
-    <label>Upload New Image (optional):</label><br>
-    <input type="file" name="image" accept="image/*"><br><br>
-
-    <button type="submit">Update</button>
-  </form>
-  <p><a href="items.php">Back to Items</a></p>
-</body>
-</html>

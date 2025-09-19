@@ -6,4 +6,4 @@ $id = $_GET['id'] ?? null;
 if ($id) {
     delete_item($id);
 }
-header('Location: /items.php'); exit;
+header('Location: /dashboard.php'); exit;

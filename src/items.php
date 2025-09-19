@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__.'/db.php';
+require_once __DIR__ . '/db.php';
 
 function get_all_items() {
     $pdo = DB::get();
@@ -36,10 +36,7 @@ function create_item($name, $desc, $price, $image = null) {
     ]);
 }
 
-/**
- * Update item.
- * Jika $image null, maka kolom image tidak diubah.
- */
+
 function update_item($id, $name, $desc, $price, $image = null) {
     $pdo = DB::get();
 

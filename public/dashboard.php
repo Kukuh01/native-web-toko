@@ -26,7 +26,7 @@ $items = get_all_items();
                     <p>Halo, <?php echo htmlspecialchars($_SESSION['user_email']); ?></p>
                 </div>
                 <img src="assets/img/defaultProfile.jpg" alt="">
-                <a href="/logout.php">Logout</a>
+                <a href="/logout.php" class="btn-logout">Logout</a>
             </div>
             <!-- END PROFILE -->
         </div>
@@ -43,7 +43,7 @@ $items = get_all_items();
             <!-- START CONTENT-->
             <div class="content">
                 <h2>List Items</h2>
-                <button id="btnOpenModal" class="btn-create">Create New Item</button>
+                <button id="createOpenModal" class="btn-create">Create New Item</button>
 
                 <table border="1" cellpadding="6">
                     <tr>
@@ -70,7 +70,14 @@ $items = get_all_items();
                         </td>
                         <td><?php echo $it['price']; ?></td>
                         <td>
-                        <a href="/edit.php?id=<?php echo $it['id']; ?>" class="btn-action">Edit</a> |
+                        <a href="#" 
+                            class="btn-action btn-edit" 
+                            data-id="<?php echo $it['id']; ?>"
+                            data-name="<?php echo htmlspecialchars($it['name']); ?>"
+                            data-description="<?php echo htmlspecialchars($it['description']); ?>"
+                            data-price="<?php echo $it['price']; ?>"
+                            data-image="<?php echo htmlspecialchars($it['image']); ?>"
+                        >Edit</a> |
                         <a href="/delete.php?id=<?php echo $it['id']; ?>" onclick="return
                         confirm('Yakin?')" class="btn-action">Delete</a>
                         </td>
@@ -83,8 +90,8 @@ $items = get_all_items();
 
             <!-- START CREATE MODAL -->
             <div id="createModal" class="modal">
-                <div class="modal-content">
-                    <span id="closeModal" class="close">&times;</span>
+                <div class="create-modal-content">
+                    <span id="createCloseModal" class="close">&times;</span>
                     <h2>Create New Item</h2>
                     <form method="post" enctype="multipart/form-data" action="create.php">
                     <label>Name:</label><br>
@@ -105,6 +112,40 @@ $items = get_all_items();
             </div>
             <!-- END CREATE MODAL -->
 
+
+            <!-- START EDIT MODAL -->
+            <div id="editModal" class="modal">
+            <div class="edit-modal-content">
+                <span id="editCloseModal" class="close">&times;</span>
+                <h2>Edit Item</h2>
+                <form method="post" enctype="multipart/form-data" action="edit.php" id="editForm">
+                    <input type="hidden" name="id" id="edit-id">
+                    <div class="container">
+                        <div>
+                            <label>Name:</label><br>
+                            <input type="text" name="name" id="edit-name" required><br><br>
+
+                            <label>Description:</label><br>
+                            <textarea name="description" id="edit-description"></textarea><br><br>
+
+                            <label>Price:</label><br>
+                            <input type="number" name="price" step="0.01" id="edit-price"><br><br>
+                        </div>
+                        <div>
+                            <label>Current Image:</label><br>
+                            <img id="edit-current-image" src="" style="max-width:150px;"><br>
+
+                            <label>Upload New Image (optional):</label><br>
+                            <input type="file" name="image" accept="image/*"><br><br>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-save">Save</button>
+                </form>
+            </div>
+            </div>
+            <!-- END EDIT MODAL -->
+
         </div>
         <!-- END MAIN -->
 
@@ -116,13 +157,43 @@ $items = get_all_items();
 
 
         <script>
-        const modal = document.getElementById("createModal");
-        const btn   = document.getElementById("btnOpenModal");
-        const span  = document.getElementById("closeModal");
+        // CREATE MODAL
+        const createModal = document.getElementById("createModal");
+        const createBtn   = document.getElementById("createOpenModal");
+        const createSpan  = document.getElementById("createCloseModal");
 
-        btn.onclick = () => modal.style.display = "block";
-        span.onclick = () => modal.style.display = "none";
-        window.onclick = (e) => { if (e.target == modal) modal.style.display = "none"; }
+        createBtn.onclick = () => createModal.style.display = "block";
+        createSpan.onclick = () => createModal.style.display = "none";
+        window.onclick = (e) => { if (e.target == createModal) createModal.style.display = "none"; }
+
+        // EDIT MODAL
+        const editModal = document.getElementById("editModal");
+        const editSpan  = document.getElementById("editCloseModal");
+
+        document.querySelectorAll(".btn-edit").forEach(btn => {
+            btn.addEventListener("click", (e) => {
+                e.preventDefault();
+
+                document.getElementById("edit-id").value = btn.dataset.id;
+                document.getElementById("edit-name").value = btn.dataset.name;
+                document.getElementById("edit-description").value = btn.dataset.description;
+                document.getElementById("edit-price").value = btn.dataset.price;
+
+                if (btn.dataset.image) {
+                    document.getElementById("edit-current-image").src = "/uploads/" + btn.dataset.image;
+                    document.getElementById("edit-current-image").style.display = "block";
+                } else {
+                    document.getElementById("edit-current-image").style.display = "none";
+                }
+
+                editModal.style.display = "block";
+            });
+        });
+
+        editSpan.onclick = () => editModal.style.display = "none";
+        window.addEventListener("click", (e) => {
+            if (e.target == editModal) editModal.style.display = "none";
+        });
         </script>
     </body>
 </html>
